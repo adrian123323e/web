@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades Robótica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1a73e8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .actividad {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .actividad .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .actividad img {
+            width: 100%;
+            border-radius: 10px;
+            max-height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .actividad h2 {
+            margin-top: 10px;
+            font-size: 1.5em;
+        }
+        .actividad p {
+            font-size: 1em;
+            color: #555;
+        }
+        .actividad a {
+            text-decoration: none;
+            color: #1a73e8;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        .actividad-detalle {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .actividad-detalle img {
+            max-width: 800px;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .actividad-detalle .codigo {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #333;
+        }
+
+        /* Estilo para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Actividades Robótica - Maqueen MakeCode</h1>
+</header>
+
+<section class="actividad">
+    <div class="card">
+        <img src="C:\Users\Usuario\Desktop\ActividadesRobotica\Captura de pantalla 2025-02-18 092616.png" alt="Actividad 1" onclick="openModal('actividad1_grande.jpg')">
+        <h2>Actividad 1: Contador con botones</h2>
+        <p>En esta actividad enseñamos cómo hacer que el robot cuente números utilizando los botones A y B.</p>
+        <a href="#actividad1">Ver más detalles</a>
+    </div>
+    <div class="card">
+        <img src="Captura de pantalla 2025-02-18 095220.png" alt="Actividad 2" onclick="openModal('actividad2_grande.jpg')">
+        <h2>Actividad 2: Control de volumen con gestos</h2>
+        <p>En esta actividad, el robot cambia el volumen y muestra diferentes iconos al agitarlo.</p>
+        <a href="#actividad2">Ver más detalles</a>
+    </div>
+</section>
+
+<!-- Detalles de la actividad 1 -->
+<section id="actividad1" class="actividad-detalle">
+    <h2>Actividad 1: Contador con botones</h2>
+    <img src="C:\Users\Usuario\Desktop\ActividadesRobotica\Captura de pantalla 2025-02-18 092616.png" alt="Contador con botones" onclick="openModal('actividad1_grande.jpg')">
+    <div class="codigo">
+        <h3>Código de la actividad:</h3>
+        <pre>
+// Código de la actividad 1: Contador con botones
+input.onButtonPressed(Button.A, function () {
+    if (count < 10) {
+        count += 1
+    }
+    basic.showNumber(count)
+})
+input.onButtonPressed(Button.AB, function () {
+    basic.showNumber(0)
+    count = 0
+})
+input.onButtonPressed(Button.B, function () {
+    if (count > 0) {
+        count += 0 - 1
+    }
+    basic.showNumber(count)
+})
+let count = 0
+basic.showNumber(0)
+        </pre>
+    </div>
+    <p>Este código permite que el robot cuente con los botones A y B. Cuando presionas el botón A, el contador aumenta. Si presionas el botón B, el contador disminuye. Si presionas el botón AB, el contador se reinicia a 0.</p>
+    <a href="https://makecode.microbit.org/" target="_blank">Abrir MakeCode</a>
+
+</section>
+
+<!-- Detalles de la actividad 2 -->
+<section id="actividad2" class="actividad-detalle">
+    <h2>Actividad 2: Control de volumen con gestos</h2>
+    <img src="Captura de pantalla 2025-02-18 095220.png" alt="Gestos para controlar el volumen" onclick="openModal('actividad2_grande.jpg')">
+    <div class="codigo">
+        <h3>Código de la actividad:</h3>
+        <pre>
+// Código de la actividad 2: Control de volumen con agitar
+input.onGesture(Gesture.Shake, function () {
+    volumen = randint(1, 3)
+    music.setVolume(volumen)
+    if (volumen == 1) {
+        basic.showIcon(IconNames.Square)
+    } else if (volumen == 2) {
+        basic.showIcon(IconNames.Scissors)
+    } else {
+        basic.showIcon(IconNames.Chessboard)
+    }
+    basic.pause(1000)
+    basic.clearScreen()
+    music.setVolume(127)
+})
+let volumen = 0
+basic.clearScreen()
+music.setVolume(0)
+        </pre>
+    </div>
+    <p>En este código, el robot ajusta el volumen del sonido al agitarlo. Al cambiar el volumen, también muestra un icono en la pantalla. Los iconos representarán diferentes niveles de volumen: un cuadrado, unas tijeras o un tablero de ajedrez. El volumen vuelve a su valor por defecto después de 1 segundo.</p>
+    <a href="https://makecode.microbit.org/" target="_blank">Abrir MakeCode</a>
+</section>
+
+<!-- Modal de imagen grande -->
+<div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modal-img" src="" alt="Imagen grande">
+</div>
+
+<script>
+    function openModal(imageSrc) {
+        document.getElementById("modal-img").src = imageSrc;
+        document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
